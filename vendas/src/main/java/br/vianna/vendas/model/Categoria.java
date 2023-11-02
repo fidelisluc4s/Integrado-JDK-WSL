@@ -2,14 +2,18 @@ package br.vianna.vendas.model;
 
 public class Categoria {
 
+    private int id;
     private String nome;
 
     private boolean temIsencao;
 
+
+
     public Categoria() {
     }
 
-    public Categoria(String nome, boolean temIsencao) {
+    public Categoria(int id, String nome, boolean temIsencao) {
+        this.id = id;
         this.nome = nome;
         this.temIsencao = temIsencao;
     }

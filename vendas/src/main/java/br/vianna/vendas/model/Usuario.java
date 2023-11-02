@@ -7,11 +7,17 @@ import java.time.LocalDateTime;
 import java.time.Period;
 
 public class Usuario {
+
+    private int id;
     private String nome, email, login, senha;
     private LocalDate dataNascimento;
     private LocalDateTime dataUltimoAcesso;
     protected ETipoUsuario perfil;
     private int idade;
+
+    public Usuario(int id) {
+        this.id = id;
+    }
 
     public Usuario(String nome, String email, String login, String senha, ETipoUsuario perfil) {
         this.nome = nome;
@@ -40,6 +46,15 @@ public class Usuario {
                 senha.contains("&") ) && senha.matches("[A-Z]") && senha.matches("[a-z]")
                 && senha.matches("[0-9]");
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNome() {
         return nome;
     }
