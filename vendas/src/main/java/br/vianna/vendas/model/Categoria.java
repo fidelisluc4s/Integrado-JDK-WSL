@@ -4,13 +4,7 @@ public class Categoria {
 
     private int id;
     private String nome;
-
     private boolean temIsencao;
-
-
-
-    public Categoria() {
-    }
 
     public Categoria(int id, String nome, boolean temIsencao) {
         this.id = id;
@@ -18,8 +12,19 @@ public class Categoria {
         this.temIsencao = temIsencao;
     }
 
+    public Categoria() {
+    }
+
     public Categoria(String nome) {
         this.nome = nome;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -37,6 +42,4 @@ public class Categoria {
     public void setTemIsencao(boolean temIsencao) {
         this.temIsencao = temIsencao;
     }
-
-
 }

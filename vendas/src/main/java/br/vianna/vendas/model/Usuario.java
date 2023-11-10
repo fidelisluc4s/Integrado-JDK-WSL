@@ -1,6 +1,6 @@
 package br.vianna.vendas.model;
 
-import br.vianna.vendas.model.eNUM.ETipoUsuario;
+import br.vianna.vendas.model.e.ETipoUsuario;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,46 +13,32 @@ public class Usuario {
     private LocalDate dataNascimento;
     private LocalDateTime dataUltimoAcesso;
     protected ETipoUsuario perfil;
-    private int idade;
-
-    public Usuario(int id) {
-        this.id = id;
-    }
-
-    public Usuario(String nome, String email, String login, String senha, ETipoUsuario perfil) {
-        this.nome = nome;
-        this.email = email;
-        this.login = login;
-        this.senha = senha;
-        this.perfil = perfil;
-    }
-
-    public ETipoUsuario getPerfil() {
-        return perfil;
-    }
-
-
 
     public Usuario() {
     }
 
-    public int idade(){
-        LocalDate hoje = LocalDate.now();
-        return Period.between(dataNascimento, hoje).getYears();
+    public Usuario(String nome, String email, String login, String senha, LocalDate dataNascimento, LocalDateTime dataUltimoAcesso, ETipoUsuario perfil) {
+        this.nome = nome;
+        this.email = email;
+        this.login = login;
+        this.senha = senha;
+        this.dataNascimento = dataNascimento;
+        this.dataUltimoAcesso = dataUltimoAcesso;
+        this.perfil = perfil;
     }
 
     public boolean isSenhaStrong(){
-        return senha.length() >= 8 && (senha.contains("@") || senha.contains("#") || senha.contains("%") ||
-                senha.contains("&") ) && senha.matches("[A-Z]") && senha.matches("[a-z]")
-                && senha.matches("[0-9]");
+        return senha.length() >=8 &&
+                (senha.contains("@") || senha.contains("#") ||
+        senha.contains("%") || senha.contains("&") ||
+                        senha.contains("-")) &&
+                senha.matches("[a-z]")&&
+                senha.matches("[A-Z]")&&
+                senha.matches("[0-9]");
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public int idade(){
+        LocalDate hoje = LocalDate.now();
+        return Period.between(dataNascimento, hoje).getYears();
     }
 
     public String getNome() {
@@ -102,4 +88,24 @@ public class Usuario {
     public void setDataUltimoAcesso(LocalDateTime dataUltimoAcesso) {
         this.dataUltimoAcesso = dataUltimoAcesso;
     }
+
+    public ETipoUsuario getPerfil() {
+        return perfil;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setPerfil(ETipoUsuario perfil) {
+        this.perfil = perfil;
+    }
+
+    //    public void setPerfil(ETipoUsuario perfil) {
+//        this.perfil = perfil;
+//    }
 }

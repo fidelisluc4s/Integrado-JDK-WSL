@@ -5,11 +5,18 @@ import br.vianna.vendas.model.faces.IImposto;
 import java.util.ArrayList;
 
 public class Produto {
+
     private String nome;
     private double preco;
     private String pesoEmbalagem;
 
     private Categoria categoria;
+
+    private ArrayList<IImposto> impostos;
+
+    public Produto() {
+        impostos = new ArrayList<>();
+    }
 
     public Produto(String nome, double preco, String pesoEmbalagem, Categoria categoria) {
         this.nome = nome;
@@ -17,6 +24,22 @@ public class Produto {
         this.pesoEmbalagem = pesoEmbalagem;
         this.categoria = categoria;
         impostos = new ArrayList<>();
+    }
+
+    public double precoVenda(){
+        return preco + totalImpostos() + lucro();
+    }
+
+    private double lucro() {
+        return preco * 0.10;
+    }
+
+    private double totalImpostos() {
+        double totalPagar = 0;
+        for (IImposto i : impostos) {
+            totalPagar += i.valorImposto(preco);
+        }
+        return totalPagar;
     }
 
     public Categoria getCategoria() {
@@ -35,18 +58,6 @@ public class Produto {
         this.impostos.add(imposto);
     }
 
-    private ArrayList<IImposto> impostos;
-
-    public Produto() {
-        impostos = new ArrayList<>();
-    }
-
-    public Produto(String nome, double preco, String pesoEmbalagem) {
-        this.nome = nome;
-        this.preco = preco;
-        this.pesoEmbalagem = pesoEmbalagem;
-    }
-
     public String getNome() {
         return nome;
     }
@@ -57,23 +68,6 @@ public class Produto {
 
     public double getPreco() {
         return preco;
-    }
-
-    public double precoVenda(){
-        return preco + totalImpostos() + lucro();
-    }
-
-    private double lucro() {
-        return preco * 0.1;
-    }
-
-
-    private double totalImpostos() {
-        double totalPagar = 0;
-        for (IImposto i : impostos){
-            totalPagar += i.valorImposto(preco);
-        }
-        return totalPagar;
     }
 
     public void setPreco(double preco) {
@@ -87,6 +81,4 @@ public class Produto {
     public void setPesoEmbalagem(String pesoEmbalagem) {
         this.pesoEmbalagem = pesoEmbalagem;
     }
-
-
 }

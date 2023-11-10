@@ -1,15 +1,21 @@
 package br.vianna.vendas.model;
 
-import br.vianna.vendas.model.eNUM.ETipoUsuario;
+import br.vianna.vendas.model.e.ETipoUsuario;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Cliente extends Usuario {
-    public Cliente(String zezin, String s, String ze, String s1, LocalDate localDate) {
+
+    public Cliente() {
         perfil = ETipoUsuario.CLIENTE;
     }
 
-    public Cliente(String nome, String email, String login, String senha) {
-        super(nome, email, login, senha, ETipoUsuario.CLIENTE);
+    public Cliente(String nome, String email, String login,
+                   String senha, LocalDate dataNascimento,
+                   LocalDateTime dataUltimoAcesso) {
+        super(nome, email, login, senha,
+                dataNascimento, dataUltimoAcesso,
+                ETipoUsuario.CLIENTE);
     }
 }

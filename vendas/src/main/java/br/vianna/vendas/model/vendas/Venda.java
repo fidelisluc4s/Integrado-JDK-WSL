@@ -8,31 +8,64 @@ import br.vianna.vendas.model.faces.ICupom;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-
 public class Venda {
+
     private LocalDateTime dataVenda;
-    //private ArrayList<Produto> produtos;
-    private ArrayList<ItemVenda> produtos;
 
     private Cliente comprador;
+
+//    private ArrayList<Produto> produtos;
+    private ArrayList<ItemVenda> produtos;
 
     private ICupom cupom;
 
     public Venda() {
         this(LocalDateTime.now(), null);
     }
-
     public Venda(LocalDateTime dataVenda, Cliente comprador) {
         this.dataVenda = dataVenda;
-        this.produtos = new ArrayList<>();
         this.comprador = comprador;
+        this.produtos = new ArrayList<>();
     }
 
     public double totalVenda(){
-        double total = 0;
-        for(ItemVenda i : produtos){
-            total += i.getPrecoVenda() * i.getQuantidade();
+        double precoTotal = 0;
+        for (ItemVenda iv: produtos) {
+            precoTotal += (iv.getPrecoVenda() * iv.getQuantidade());
         }
-        return total - ((cupom!= null)?cupom.desconto(total):0);
+        return precoTotal -
+                ((cupom != null)?cupom.desconto(precoTotal):0);
+    }
+
+    public LocalDateTime getDataVenda() {
+        return dataVenda;
+    }
+
+    public void setDataVenda(LocalDateTime dataVenda) {
+        this.dataVenda = dataVenda;
+    }
+
+    public Cliente getComprador() {
+        return comprador;
+    }
+
+    public void setComprador(Cliente comprador) {
+        this.comprador = comprador;
+    }
+
+    public ArrayList<ItemVenda> getProdutos() {
+        return produtos;
+    }
+
+    public void addProduto(ItemVenda item) {
+        this.produtos.add(item);
+    }
+
+    public ICupom getCupom() {
+        return cupom;
+    }
+
+    public void setCupom(ICupom cupom) {
+        this.cupom = cupom;
     }
 }
